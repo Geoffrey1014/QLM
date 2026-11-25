@@ -43,7 +43,7 @@ CodeQL databases are rebuilt locally.
 
 ## Linux kernel findings (RQ1)
 
-QLM-synthesized queries found **49 previously unknown bugs** in mainline Linux (v6.19-rc), status as of 2026-11-20. Reports from different queries were deduplicated by source location, so each bug is counted once; one function can hold several bugs (e.g. two separate leaks). Lifetime is measured from the commit that introduced the bug (found with `git blame`, the patch's `Fixes:` tag) to our fix. The full list is also in [`data/rq1-findings.csv`](data/rq1-findings.csv).
+QLM-synthesized queries found **49 previously unknown bugs** in mainline Linux (v6.19-rc), status as of 2026-11-20. Reports from different queries were deduplicated by source location, so each bug is counted once; one function can hold several bugs (e.g. two separate leaks). Lifetime is measured from the commit that introduced the bug (found with `git blame`, the patch's `Fixes:` tag) to our fix. The full list is also in [`data/target-linux-findings.csv`](data/target-linux-findings.csv).
 
 | Status | Bugs |
 |---|---:|
@@ -165,7 +165,7 @@ qlm-artifact/
 │   │   ├── README.md
 │   │   ├── kbh-bench.csv      # one row per commit, with in_db flag
 │   │   └── ground-truth/      # per-pattern GT JSON read by the scorer
-│   ├── rq1-findings.csv       # the 49 Linux kernel bugs found in RQ1
+│   ├── target-linux-findings.csv # the 49 Linux kernel bugs found in RQ1
 │   ├── schemas/               # bug schema definition + 125 C3 schema instances
 │   │   ├── README.md
 │   │   └── instances/  (125 .json)
@@ -213,7 +213,7 @@ qlm-artifact/
 codeql database create <REPO_ROOT>/codeql-dbs/linux-<version>-arm-am \
   --language=cpp --command="make -j$(nproc) ARCH=arm allmodconfig ..."
 
-# 2. Regenerate the 126 pair-wise mini-DBs (script in supplementary).
+# 2. Regenerate the 126 pair-wise mini-DBs.
 
 # 3. (Optional) Regenerate the LLM queries.
 #    For each (cell, seed, repeat) triple, invoke the LLM with the
